@@ -1,3 +1,6 @@
+#Not Finished
+Please wait until this tag goes away. I am still building this towards a first working version. It is not ready yet.
+
 # xarch-starter
 A light weight starter template for Xamarin Forms
 
@@ -25,4 +28,8 @@ I have tried to keep dependencies down to a minimum. There are a lot of differen
 5. Settings Plugin For Xamarin
 6. Newtonsoft Json
 
+# Personal Preferences
 
+1. I love using XAML, hence this project will use XAML for all views.
+2. While Shared Code may have its place, I never found a solid use case for it in my projects. PCL is my preferred approach.
+3. I use Visual Studio for Xamarin development with a Mac Build Host (mini mac's are great for this)

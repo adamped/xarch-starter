@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 namespace Mobile
 {
-    public class App : Application
-    {
-        public App()
-        {
+	public partial class App : Application
+	{
+		public App()
+		{
+			InitializeComponent();
+
             // The root page of your application
             MainPage = new ContentPage
             {
@@ -25,7 +28,7 @@ namespace Mobile
 					}
                 }
             };
-        }
+		}
 
         protected override void OnStart()
         {
@@ -41,5 +44,5 @@ namespace Mobile
         {
             // Handle when your app resumes
         }
-    }
+	}
 }
