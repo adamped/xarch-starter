@@ -37,6 +37,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ExtNavigationPage.cs" />
     <Compile Include="Model\AboutModel.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
@@ -122,6 +123,10 @@
     <ProjectReference Include="..\DataService\DataService.csproj">
       <Project>{70975303-5a1f-46c9-9ec5-ea6d6d991a53}</Project>
       <Name>DataService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{75222deb-9d16-49ce-92f0-01a707270a51}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

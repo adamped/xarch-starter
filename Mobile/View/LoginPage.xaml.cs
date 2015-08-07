@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Mobile.View
 {
-    public partial class LoginPage : ContentPage
+    public partial class LoginPage : BasePage
     {
         public LoginPage()
         {

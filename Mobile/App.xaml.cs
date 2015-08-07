@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Mobile.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 
 namespace Mobile
@@ -15,19 +15,7 @@ namespace Mobile
 			InitializeComponent();
 
             // The root page of your application
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-						new Label {
-							XAlign = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-                }
-            };
+            MainPage = new ExtNavigationPage(new MainPage());
 		}
 
         protected override void OnStart()

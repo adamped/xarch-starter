@@ -1,8 +1,8 @@
 #Not Finished
 Please wait until this tag goes away. I am still building this towards a first working version. It is not ready yet.
 
-# xarch-starter
-A light weight starter template for Xamarin Forms
+# Xamarin Forms Complete Starter Project
+A light weight starter project for Xamarin Forms
 
 # Why?
 As with most technologies the default sample projects only ever show the simplest way to do things. But if you need to develop a production quality application you have no idea on the best approach. And maybe that is because the great thing about programming is you can choose so many approaches why would you limit yourself.
@@ -23,10 +23,9 @@ I have tried to keep dependencies down to a minimum. There are a lot of differen
 
 1. MVVMLight Libs
 2. AutoMapper
-3. AutoFac
-4. Microsoft HTTP Client Libraries
-5. Settings Plugin For Xamarin
-6. Newtonsoft Json
+3. Microsoft HTTP Client Libraries
+4. Settings Plugin For Xamarin
+5. Newtonsoft Json
 
 # Personal Preferences
 

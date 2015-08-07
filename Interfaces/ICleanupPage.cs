@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Helper
+namespace Interfaces
 {
-    class XNavigationPage
+    public interface ICleanupPage
     {
+        void Cleanup();
     }
 }
