@@ -10,6 +10,9 @@ namespace Mobile.View
 {
     public partial class BasePage : ContentPage, ICleanupPage
     {
+
+        public Guid PageInstanceId { get; set; }
+
         public BasePage()
         {
             InitializeComponent();

@@ -8,5 +8,8 @@ namespace Common.Helper
 {
     public class Settings
     {
+
+
+
     }
 }

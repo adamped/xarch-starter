@@ -37,7 +37,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DialogService.cs" />
     <Compile Include="Helper\ExtNavigationPage.cs" />
+    <Compile Include="Helper\ExtNavigationService.cs" />
     <Compile Include="Model\AboutModel.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
@@ -120,6 +122,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{ffda80e4-b674-4e70-9fb8-7958bc824614}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataService\DataService.csproj">
       <Project>{70975303-5a1f-46c9-9ec5-ea6d6d991a53}</Project>
       <Name>DataService</Name>
