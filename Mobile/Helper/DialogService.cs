@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿// Copyright: Based upon sample code provided by MVVMLight
+
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

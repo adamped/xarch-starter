@@ -1,0 +1,3 @@
+My personal todo list to get this project to completion - anyone else just ignore
+
+- Implement DoubleTap protection on commands

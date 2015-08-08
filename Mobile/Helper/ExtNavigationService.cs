@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright: Based upon sample code provided by MVVMLight
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,6 @@ using System.Reflection;
 using Xamarin.Forms;
 using Mobile.View;
 using Common;
-
 namespace Mobile.Helper
 {
     public class ExtNavigationService : IExtNavigationService
@@ -16,6 +17,11 @@ namespace Mobile.Helper
         private readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
         private NavigationPage _navigation;
         private static AsyncLock _lock = new AsyncLock();
+
+        public ExtNavigationService(NavigationPage navigation)
+        {
+            _navigation = navigation;
+        }
 
         public string CurrentPageKey
         {
@@ -46,6 +52,10 @@ namespace Mobile.Helper
         {
             using (var releaser = await _lock.LockAsync())
             {
+                // Do not navigate to the same page. If anyone can think of a valid reason why I should then this can be removed.
+                if (pageKey == CurrentPageKey)
+                    return;
+
                 if (_pagesByKey.ContainsKey(pageKey))
                 {
                     var type = _pagesByKey[pageKey];
@@ -117,12 +127,7 @@ namespace Mobile.Helper
                 }
             }
         }
-
-        public void Initialize(NavigationPage navigation)
-        {
-            _navigation = navigation;
-        }
-
+             
         public bool CanGoBack()
         {
             return _navigation.Navigation.NavigationStack.Count > 1;

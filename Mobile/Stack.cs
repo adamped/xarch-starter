@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Helper
+namespace Mobile
 {
-    public class Settings
+    public enum Stack
     {
-
-
-
+        Authentication = 1,
+        Main = 2
     }
 }
