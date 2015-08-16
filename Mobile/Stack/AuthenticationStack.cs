@@ -1,15 +1,7 @@
 ﻿using Definition.Interfaces;
-using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
-using Mobile.Helper;
 using Mobile.PageLocator;
 using Mobile.View;
 using Mobile.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Mobile.Stack
@@ -21,7 +13,7 @@ namespace Mobile.Stack
 
         public AuthenticationStack()
         {
-            MainPage = NavigationPage = new NavigationPage();            
+            MainPage = NavigationPage = new NavigationPage();          
         }
 
         protected override void MapPages()
@@ -34,5 +26,13 @@ namespace Mobile.Stack
             _pageService.Map(typeof(LoginPage), typeof(LoginViewModel));
         }
 
+        protected override string NavigationStartPageKey
+        {
+            get
+            {
+                return _locator.LoginPage;
+            }
+        }
+        
     }
 }

@@ -1,11 +1,9 @@
 ﻿using Definition.Interfaces;
-using Mobile.View;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Mobile.Helper
@@ -54,33 +52,14 @@ namespace Mobile.Helper
 
             // Assign Binding Context
             if (_pagesByType.ContainsKey(pageType))
-                page.BindingContext = BuildViewModel(_pagesByType[pageType]);
+                page.BindingContext = ServiceLocator.Current.GetInstance<object>(_pagesByType[pageType].ToString());
             else
                 throw new InvalidOperationException(
                     "No suitable view model found for page " + pageType.ToString());
 
             return page;
         }
-
-        /// <summary>
-        /// Constructs the ViewModel based on the type defined by the Page Type
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private object BuildViewModel(Type type)
-        {
-            ConstructorInfo constructor = null;
-            object[] parameters = null;
-
-                constructor = type.GetTypeInfo()
-                    .DeclaredConstructors
-                    .FirstOrDefault(c => !c.GetParameters().Any());
-
-                parameters = new object[] { };
-
-            return constructor.Invoke(parameters);
-        }
-
+               
         public void Map(Type pageType, Type viewModelType)
         {
             lock (_pagesByType)

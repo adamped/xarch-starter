@@ -49,7 +49,7 @@ namespace Mobile.ViewModel
 
                                    if (Login.IsAuthenticated)
                                    {
-                                       _appLoader.LoadStack(StackEnum.Main);
+                                       await _appLoader.LoadStack(StackEnum.Main);
                                    }
                                }                               
 

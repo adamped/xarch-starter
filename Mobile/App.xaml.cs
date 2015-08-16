@@ -25,10 +25,12 @@ namespace Mobile
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // Initialize Services and Stack
-            SimpleIoc.Default.Register<IAppLoader>(() => new AppLoader());
-
+            var appLoader = new AppLoader();            
+            SimpleIoc.Default.Register<IAppLoader>(() => appLoader);
+            appLoader.InitializeViewModels();
+           
             // Load initial navigation stack
-            ServiceLocator.Current.GetInstance<IAppLoader>().LoadStack(StackEnum.Authentication);
+            ServiceLocator.Current.GetInstance<IAppLoader>().LoadStack(StackEnum.Authentication).Wait();
 
         }
 

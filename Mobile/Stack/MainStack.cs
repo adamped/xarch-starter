@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace Mobile.Stack
 {
-    public class MainStack: BaseStack, IStack
+    public class MainStack : BaseStack, IStack
     {
 
         private Main _locator = new Main();
@@ -23,12 +23,21 @@ namespace Mobile.Stack
             MainPage = new MasterDetailPage()
             {
                 BackgroundColor = Color.Transparent,
-                //Master = new MenuPage() { Title = "Menu", Icon = "todo: insert hamburger image" },
+                Master = BuildMenuPage(),
                 Detail = NavigationPage
             };
-            
         }
-        
+
+        private Page BuildMenuPage()
+        {
+            return new MenuPage()
+            {             
+                Title = "Menu",
+                Icon = "",  //TODO: add in default icon 
+                BindingContext = new MenuViewModel(),
+            };
+        }
+
         protected override void MapPages()
         {
             _navigationService.Map(_locator.MainPage, typeof(MainPage));
@@ -39,6 +48,14 @@ namespace Mobile.Stack
         {
             _pageService.Map(typeof(MainPage), typeof(MainViewModel));
             _pageService.Map(typeof(AboutPage), typeof(AboutViewModel));
+        }
+
+        protected override string NavigationStartPageKey
+        {
+            get
+            {
+                return _locator.MainPage;
+            }
         }
     }
 }

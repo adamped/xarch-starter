@@ -8,6 +8,8 @@ namespace Definition.Interfaces
 {
     public interface IExtNavigationService
     {
+        Task NavigateTo(string pageKey);
+
         Task NavigateTo(string pageKey, object parameter);
 
         bool CanGoBack();

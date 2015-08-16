@@ -45,6 +45,11 @@ namespace Mobile.Helper
             }
         }
 
+        public async Task NavigateTo(string pageKey)
+        {
+            await NavigateTo(pageKey, null);
+        }
+
         public async Task NavigateTo(string pageKey, object parameter)
         {
             await NavigateTo(pageKey, parameter, true);

@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Mobile.Helper;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Mobile.Stack
@@ -15,12 +16,12 @@ namespace Mobile.Stack
         private IDialogService _dialogService = null;
         protected IPageService _pageService = null;
 
-        private bool _isMapped = false;
+        private bool _isFirstRun = false;
 
         /// <summary>
         /// Will register appropriate Services for Dependency Injection.
         /// </summary>
-        public void RegisterServices()
+        public async Task RegisterServices()
         {
             if (_pageService == null)
                 _pageService = new PageService();
@@ -35,17 +36,21 @@ namespace Mobile.Stack
 
             SimpleIoc.Default.Register<IDialogService>(() => _dialogService);
 
-            if (!_isMapped)
+            if (!_isFirstRun)
             {
                 MapPages();
                 MapViewModels();
 
-                _isMapped = true;
+                await _navigationService.NavigateTo(NavigationStartPageKey);
+
+                _isFirstRun = true;
             }
 
         }
 
         protected virtual void MapPages() { }
         protected virtual void MapViewModels() { }
+        protected virtual string NavigationStartPageKey { get; }
+        
     }
 }

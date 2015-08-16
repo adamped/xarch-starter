@@ -1,28 +1,28 @@
-﻿using Definition.Enums;
+﻿using Common;
+using Definition.Enums;
 using Definition.Interfaces;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using Microsoft.Practices.ServiceLocation;
 using Mobile.Stack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Mobile
 {
     public class AppLoader : IAppLoader
     {
-        private static object _lock = new object();
+        private static AsyncLock _lock = new AsyncLock();
         private IDictionary<StackEnum, IStack> _stacks = null;
         private StackEnum? _currentStack = null; 
 
         public AppLoader()
         {
             // Load Navigation Stacks
-            InitializeStacks();
-
-            // Load ViewModels
-            InitializeViewModels();                       
+            InitializeStacks();                     
         }
 
         /// <summary>
@@ -36,10 +36,10 @@ namespace Mobile
         }
         
         /// <summary>
-        /// Automatically create and instance of and register any ViewModel found in the namespace
+        /// Automatically create an instance of and register any ViewModel found in the namespace
         /// Mobile.ViewModel
         /// </summary>
-        private void InitializeViewModels()
+        public void InitializeViewModels()
         {
             string @namespace = "Mobile.ViewModel";
 
@@ -48,7 +48,23 @@ namespace Mobile
                         select t;
 
             foreach (var t in query.ToList())
-                SimpleIoc.Default.Register(() => Activator.CreateInstance(t.GetType()), t.ToString());
+            {
+                var defaultConstructor = t.DeclaredConstructors.First();
+
+                if (defaultConstructor.GetParameters().Count() == 0)
+                    SimpleIoc.Default.Register(() => Activator.CreateInstance(t.AsType()), t.ToString());
+                else
+                {
+                    List<object> parameters = new List<object>();
+                    foreach (var p in defaultConstructor.GetParameters())
+                    {
+                        parameters.Add(ServiceLocator.Current.GetInstance(p.ParameterType));
+                    }
+
+                    SimpleIoc.Default.Register(() => Activator.CreateInstance(t.AsType(), parameters.ToArray()), t.ToString());
+                }
+            }
+                
 
         }
 
@@ -57,9 +73,9 @@ namespace Mobile
         /// Changes the MainPage of the mobile app to the chosen stack
         /// </summary>
         /// <param name="stack"></param>
-        public void LoadStack(StackEnum stack)
+        public async Task LoadStack(StackEnum stack)
         {
-            lock (_lock)
+            using (var releaser = await _lock.LockAsync())
             {
                 if (stack == _currentStack)
                     return;
@@ -70,7 +86,7 @@ namespace Mobile
                 var stackInstance = _stacks[stack];
 
                 // Register Services
-                stackInstance.RegisterServices();
+                await stackInstance.RegisterServices();
 
                 // Change MainPage
                 App.Current.MainPage = stackInstance.MainPage;
