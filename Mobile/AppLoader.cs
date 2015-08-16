@@ -14,7 +14,7 @@ namespace Mobile
     {
         private static object _lock = new object();
         private IDictionary<StackEnum, IStack> _stacks = null;
-        private StackEnum? _currentStack = null;
+        private StackEnum? _currentStack = null; 
 
         public AppLoader()
         {
