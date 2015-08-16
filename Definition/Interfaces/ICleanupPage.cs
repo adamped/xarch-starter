@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mobile
+namespace Definition.Interfaces
 {
-    public enum Stack
+    public interface ICleanupPage
     {
-        Authentication = 1,
-        Main = 2
+        void Cleanup();
     }
 }

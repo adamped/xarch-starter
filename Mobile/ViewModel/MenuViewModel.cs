@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Definition.Interfaces;
 
-namespace Interfaces
+namespace Mobile.ViewModel
 {
-    public interface ICleanupPage
+    public class MenuViewModel : BaseViewModel
     {
-        void Cleanup();
+       
     }
 }

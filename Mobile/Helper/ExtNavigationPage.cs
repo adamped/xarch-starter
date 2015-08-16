@@ -5,12 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Interfaces;
+using Definition.Interfaces;
 
 namespace Mobile.Helper
 {
     public class ExtNavigationPage : NavigationPage
     {
+        public ExtNavigationPage()
+        {
+            Init();
+        }
 
         public ExtNavigationPage(Page content)
             : base(content)

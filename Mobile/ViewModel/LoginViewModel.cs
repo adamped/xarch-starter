@@ -1,19 +1,19 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Definition.Enums;
+using Definition.Interfaces;
+using GalaSoft.MvvmLight.Command;
 using Mobile.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Interfaces;
 
 namespace Mobile.ViewModel
 {
     public class LoginViewModel: BaseViewModel
     {
 
-        public LoginViewModel(IExtNavigationService navigationService): base(navigationService)
+        private IAppLoader _appLoader = null;
+
+        public LoginViewModel(IAppLoader appLoader)
         {
+            _appLoader = appLoader;
+
             Login = new LoginModel();
         }
 
@@ -49,7 +49,7 @@ namespace Mobile.ViewModel
 
                                    if (Login.IsAuthenticated)
                                    {
-                                       
+                                       _appLoader.LoadStack(StackEnum.Main);
                                    }
                                }                               
 

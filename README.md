@@ -27,6 +27,10 @@ I have tried to keep dependencies down to a minimum. There are a lot of differen
 4. Settings Plugin For Xamarin
 5. Newtonsoft Json
 
+# Conventions
+
+ViewModels are loaded on a convention basis. They must be in the namespace Mobile.ViewModel and the class name must end in ViewModel. They will then be automatically loaded.
+
 # Personal Preferences
 
 1. I love using XAML, hence this project will use XAML for all views.

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Interfaces;
+using Definition.Interfaces;
 using System.Reflection;
 using Xamarin.Forms;
 using Mobile.View;
@@ -16,11 +16,13 @@ namespace Mobile.Helper
     {
         private readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
         private NavigationPage _navigation;
+        private IPageService _pageService;
         private static AsyncLock _lock = new AsyncLock();
 
-        public ExtNavigationService(NavigationPage navigation)
+        public ExtNavigationService(NavigationPage navigation, IPageService pageService)
         {
             _navigation = navigation;
+            _pageService = pageService;
         }
 
         public string CurrentPageKey
@@ -52,53 +54,15 @@ namespace Mobile.Helper
         {
             using (var releaser = await _lock.LockAsync())
             {
-                // Do not navigate to the same page. If anyone can think of a valid reason why I should then this can be removed.
+                // Do not navigate to the same page.
                 if (pageKey == CurrentPageKey)
                     return;
 
                 if (_pagesByKey.ContainsKey(pageKey))
                 {
                     var type = _pagesByKey[pageKey];
-                    ConstructorInfo constructor = null;
-                    object[] parameters = null;
 
-                    if (parameter == null)
-                    {
-                        constructor = type.GetTypeInfo()
-                            .DeclaredConstructors
-                            .FirstOrDefault(c => !c.GetParameters().Any());
-
-                        parameters = new object[] { };
-                    }
-                    else
-                    {
-                        constructor = type.GetTypeInfo()
-                            .DeclaredConstructors
-                            .FirstOrDefault(
-                                c =>
-                                {
-                                    var p = c.GetParameters();
-                                    return p.Count() == 1
-                                           && p[0].ParameterType == parameter.GetType();
-                                });
-
-                        parameters = new[]
-                                    {
-                                        parameter
-                                    };
-                    }
-
-                    if (constructor == null)
-                        throw new InvalidOperationException(
-                            "No suitable constructor found for page " + pageKey);
-
-                    var page = constructor.Invoke(parameters) as Page;
-
-                    var basePage = page as BasePage;
-
-                    // Assigns a unique Id to the page.
-                    if (basePage != null)
-                        basePage.PageInstanceId = Guid.NewGuid();
+                    var page = _pageService.Build(type, parameter);
 
                     await _navigation.PushAsync(page, animated);
                 }
@@ -106,14 +70,14 @@ namespace Mobile.Helper
                 {
                     throw new ArgumentException(
                         string.Format(
-                            "No such page: {0}. Did you forget to call NavigationService.Configure?",
+                            "No such page: {0}. Did you forget to call NavigationService.Map?",
                             pageKey),
                         "pageKey");
                 }
             }
         }
 
-        public void Configure(string pageKey, Type pageType)
+        public void Map(string pageKey, Type pageType)
         {
             lock (_pagesByKey)
             {
@@ -127,7 +91,7 @@ namespace Mobile.Helper
                 }
             }
         }
-             
+
         public bool CanGoBack()
         {
             return _navigation.Navigation.NavigationStack.Count > 1;

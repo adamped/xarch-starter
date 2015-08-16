@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Definition.Interfaces;
 
-namespace Mobile.ViewModel
+namespace Definition.Enums
 {
-    public class AboutViewModel: BaseViewModel
+    public enum StackEnum
     {
-       
+        Authentication = 1,
+        Main = 2
     }
 }

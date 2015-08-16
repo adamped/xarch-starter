@@ -19,6 +19,7 @@ namespace Mobile.Helper
     Action afterHideCallback)
         {
             if (_dialogPage != null)
+                
                 await _dialogPage.DisplayAlert(
                     title,
                     message,

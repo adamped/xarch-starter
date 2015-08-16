@@ -1,4 +1,4 @@
-﻿using Interfaces;
+﻿using Definition.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +16,9 @@ namespace Mobile.View
         public BasePage()
         {
             InitializeComponent();
+            PageInstanceId = Guid.NewGuid();
         }
 
-        public virtual void Cleanup()
-        {
-            
-        }
+        public virtual void Cleanup() { }
     }
 }
