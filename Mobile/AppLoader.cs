@@ -3,13 +3,16 @@ using Common;
 using DataService;
 using Definition.Enums;
 using Definition.Interfaces;
+using Definition.Interfaces.Messenger;
 using Definition.Interfaces.Repository;
 using Definition.Interfaces.Service;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using Mobile.Messenger;
 using Mobile.Model;
 using Mobile.Stack;
+using Mobile.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +29,9 @@ namespace Mobile
 
         public AppLoader()
         {
+
+            // Sequence is important here
+
             // Load Navigation Stacks
             InitializeStacks();
 
@@ -35,9 +41,12 @@ namespace Mobile
             // Load Data Services
             InitializeDataServices();
 
+            // Load Messengers
+            InitializeMessengers();
+
             // Load Models
             InitializeModels();
-
+            
         }
 
         /// <summary>
@@ -61,12 +70,19 @@ namespace Mobile
             SimpleIoc.Default.Register<IAuthenticationService>(() => new AuthenticationService(ServiceLocator.Current.GetInstance<IAuthenticationRepository>()));
             SimpleIoc.Default.Register<IExampleService>(() => new ExampleService(ServiceLocator.Current.GetInstance<IExampleRepository>()));
         }
+        
+        private void InitializeMessengers()
+        {
+            SimpleIoc.Default.Register<IDefaultMessenger>(() => new DefaultMessenger());
+        }
 
         private void InitializeModels()
         {
             SimpleIoc.Default.Register(() => new LoginModel(ServiceLocator.Current.GetInstance<IAuthenticationService>()));
+            SimpleIoc.Default.Register(() => new MainModel());
         }
-        
+      
+
         /// <summary>
         /// Automatically create an instance of and register any ViewModel found in the namespace
         /// Mobile.ViewModel
@@ -83,8 +99,10 @@ namespace Mobile
             {
                 var defaultConstructor = t.DeclaredConstructors.First();
 
+                object instance = null;
+
                 if (defaultConstructor.GetParameters().Count() == 0)
-                    SimpleIoc.Default.Register(() => Activator.CreateInstance(t.AsType()), t.ToString());
+                   instance = (BaseViewModel)Activator.CreateInstance(t.AsType());
                 else
                 {
                     List<object> parameters = new List<object>();
@@ -93,8 +111,13 @@ namespace Mobile
                         parameters.Add(ServiceLocator.Current.GetInstance(p.ParameterType));
                     }
 
-                    SimpleIoc.Default.Register(() => Activator.CreateInstance(t.AsType(), parameters.ToArray()), t.ToString());
+                    instance = (BaseViewModel)Activator.CreateInstance(t.AsType(), parameters.ToArray());
                 }
+
+                // Subscribe to all messenger events
+                ((BaseViewModel)instance).Subscribe();
+
+                SimpleIoc.Default.Register(() => instance, t.ToString());
             }
 
         }

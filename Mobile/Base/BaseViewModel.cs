@@ -10,6 +10,13 @@ namespace Mobile.ViewModel
     {
         protected AsyncLock _lock = new AsyncLock();
 
+
+        public BaseViewModel() { }
+        
+        public BaseViewModel(GalaSoft.MvvmLight.Messaging.IMessenger messenger) : base(messenger) { }
+
+        public virtual void Subscribe() { }
+      
         protected IExtNavigationService NavigationService
         {
             get

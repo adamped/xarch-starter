@@ -1,7 +1,9 @@
 ﻿using Definition.Enums;
 using Definition.Interfaces;
+using Definition.Interfaces.Messenger;
 using GalaSoft.MvvmLight.Command;
 using Mobile.Model;
+using System;
 
 namespace Mobile.ViewModel
 {
@@ -9,10 +11,12 @@ namespace Mobile.ViewModel
     {
 
         private IAppLoader _appLoader = null;
+        private IDefaultMessenger _defaultMessenger = null;
 
-        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel)
+        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel, IDefaultMessenger defaultMessenger): base(defaultMessenger)
         {
             _appLoader = appLoader;
+            _defaultMessenger = defaultMessenger;
 
             Login = loginModel;
         }
@@ -49,6 +53,7 @@ namespace Mobile.ViewModel
 
                                    if (Login.IsAuthenticated)
                                    {
+                                       _defaultMessenger.Send("Sent from LoginViewModel");
                                        await _appLoader.LoadStack(StackEnum.Main);
                                    }
                                }                               
@@ -57,6 +62,11 @@ namespace Mobile.ViewModel
             }
         }
 
+        public override void Cleanup()
+        {
+            base.Cleanup();
 
+            _defaultMessenger.Unregister(this);
+        }
     }
 }

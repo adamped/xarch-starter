@@ -128,6 +128,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Definition\Definition.csproj">
+      <Project>{3c22081c-c5bd-4e4a-9d84-bae9261fc0d9}</Project>
+      <Name>Definition</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mobile\Mobile.csproj">
       <Project>{5e5a4f21-29e9-4a65-8bc8-f0c681288c89}</Project>
       <Name>Mobile</Name>

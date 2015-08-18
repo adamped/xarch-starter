@@ -1,15 +1,13 @@
 ﻿// Copyright: Based upon sample code provided by MVVMLight
 
+using Common;
+using Definition.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Definition.Interfaces;
-using System.Reflection;
 using Xamarin.Forms;
-using Mobile.View;
-using Common;
+
 namespace Mobile.Helper
 {
     public class ExtNavigationService : IExtNavigationService
