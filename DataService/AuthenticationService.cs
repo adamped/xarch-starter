@@ -19,8 +19,6 @@ namespace DataService
             _authenticationRepository = authenticationRepository;
         }
 
-        private static string Token = "";
-
         public async Task<bool> Authenticate(string email, string password)
         {
             var result = await _authenticationRepository.Login(email, password);
