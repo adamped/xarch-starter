@@ -38,10 +38,16 @@
   <ItemGroup>
     <Compile Include="Enums\Stack.cs" />
     <Compile Include="Interfaces\IAppLoader.cs" />
+    <Compile Include="Interfaces\Repository\IAuthenticationRepository.cs" />
+    <Compile Include="Interfaces\Repository\IAuthRepository.cs" />
+    <Compile Include="Interfaces\Repository\IExampleRepository.cs" />
+    <Compile Include="Interfaces\Service\IExampleService.cs" />
+    <Compile Include="Interfaces\Service\IAuthenticationService.cs" />
     <Compile Include="Interfaces\ICleanupPage.cs" />
     <Compile Include="Interfaces\IExtNavigationService.cs" />
     <Compile Include="Interfaces\IPageService.cs" />
     <Compile Include="Interfaces\IStack.cs" />
+    <Compile Include="Model\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

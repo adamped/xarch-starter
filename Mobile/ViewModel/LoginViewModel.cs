@@ -10,11 +10,11 @@ namespace Mobile.ViewModel
 
         private IAppLoader _appLoader = null;
 
-        public LoginViewModel(IAppLoader appLoader)
+        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel)
         {
             _appLoader = appLoader;
 
-            Login = new LoginModel();
+            Login = loginModel;
         }
 
         private LoginModel _login = null;

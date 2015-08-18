@@ -1,6 +1,3 @@
-#Not Finished
-Please wait until this tag goes away. I am still building this towards a first working version. It is not ready yet.
-
 # Xamarin Forms Complete Starter Project
 A light weight starter project for Xamarin Forms
 
@@ -14,7 +11,7 @@ All projects I have developed have shown the need for these :
 
 1. MVVM Framework
 2. API Connectivity
-3. Local Storage (Some a simple key/value others SQLite)
+3. Local Storage
 4. ServiceLocator
 5. Constructor Dependency Injection
 
