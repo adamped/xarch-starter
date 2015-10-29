@@ -15,6 +15,10 @@ namespace Mobile.ViewModel
         public BaseViewModel(GalaSoft.MvvmLight.Messaging.IMessenger messenger) : base(messenger) { }
 
         public virtual void Subscribe() { }
+
+        public virtual void OnAppearing() { }
+
+        public virtual void OnDisappearing() { }
       
         protected IExtNavigationService NavigationService
         {
