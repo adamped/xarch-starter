@@ -2,8 +2,8 @@
   "dependencies": {
     "Microsoft.Bcl.Build": "1.0.21",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "MvvmLightLibs": "5.1.1",
-    "Xamarin.Forms": "1.4.4.6392"
+    "MvvmLightLibs": "5.2.0",
+    "Xamarin.Forms": "1.5.1.6471"
   },
   "frameworks": {
     "uap10.0": {}
