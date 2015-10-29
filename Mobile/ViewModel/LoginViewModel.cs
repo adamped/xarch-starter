@@ -53,7 +53,7 @@ namespace Mobile.ViewModel
 
                                    if (Login.IsAuthenticated)
                                    {
-                                       _defaultMessenger.Send("Sent from LoginViewModel");
+                                       _defaultMessenger.SendNotification("Sent from LoginViewModel", Token.LoggedIn);
                                        await _appLoader.LoadStack(StackEnum.Main);
                                    }
                                }                               

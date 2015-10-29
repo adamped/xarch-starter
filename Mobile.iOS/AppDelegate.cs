@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace Mobile.iOS
 {
@@ -23,7 +24,20 @@ namespace Mobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) => {
+                if (null != e.View.StyleId)
+                {
+                    e.NativeView.AccessibilityIdentifier = e.View.StyleId;
+                }
+            };
+
             LoadApplication(new App());
+
+#if ENABLE_TEST_CLOUD
+// requires Xamarin Test Cloud Agent
+Xamarin.Calabash.Start();
+#endif
 
             return base.FinishedLaunching(app, options);
         }

@@ -1,4 +1,5 @@
-﻿using Definition.Interfaces.Messenger;
+﻿using Definition.Enums;
+using Definition.Interfaces.Messenger;
 using GalaSoft.MvvmLight.Command;
 using Mobile.Model;
 using System;
@@ -18,7 +19,7 @@ namespace Mobile.ViewModel
 
         public override void Subscribe()
         {
-            _defaultMessenger.RegisterNotification(this, ReceiveNotification);
+            _defaultMessenger.RegisterNotification(this, Token.LoggedIn, ReceiveNotification);
         }
 
         private void ReceiveNotification(string message)

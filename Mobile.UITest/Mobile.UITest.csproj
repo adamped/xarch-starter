@@ -61,5 +61,15 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mobile.Droid\Mobile.Droid.csproj">
+      <Project>{e0733125-8b9d-4f2b-a207-4364cd1cbfd6}</Project>
+      <Name>Mobile.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobile.iOS\Mobile.iOS.csproj">
+      <Project>{9b76c107-87fa-4471-82a6-a72e707c49fd}</Project>
+      <Name>Mobile.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
