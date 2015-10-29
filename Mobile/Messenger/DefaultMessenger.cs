@@ -1,18 +1,19 @@
-﻿using Definition.Interfaces.Messenger;
+﻿using Definition.Enums;
+using Definition.Interfaces.Messenger;
 using System;
 
 namespace Mobile.Messenger
 {
     public class DefaultMessenger : GalaSoft.MvvmLight.Messaging.Messenger, IDefaultMessenger
     {
-        public void RegisterNotification(object recipient, Action<string> action)
+        public void RegisterNotification(object recipient, Token token, Action<string> action)
         {
-            Register<string>(recipient, action);            
+            Register<string>(recipient, token, action);            
         }
 
-        public void SendNotification(string message)
+        public void SendNotification(string message, Token token)
         {
-            Send<string>(message);
+            Send<string>(message, token);
         }
     }
 }

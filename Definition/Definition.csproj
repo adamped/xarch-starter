@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Enums\Stack.cs" />
+    <Compile Include="Enums\Token.cs" />
     <Compile Include="Interfaces\IAppLoader.cs" />
     <Compile Include="Interfaces\Messenger\IDefaultMessenger.cs" />
     <Compile Include="Interfaces\Repository\IAuthenticationRepository.cs" />

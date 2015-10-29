@@ -9,8 +9,7 @@ namespace Mobile.ViewModel
     public class BaseViewModel : ViewModelBase
     {
         protected AsyncLock _lock = new AsyncLock();
-
-
+        
         public BaseViewModel() { }
         
         public BaseViewModel(GalaSoft.MvvmLight.Messaging.IMessenger messenger) : base(messenger) { }

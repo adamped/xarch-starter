@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Mobile.Helper;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -33,7 +34,7 @@ namespace Mobile.Stack
 
             if (_dialogService == null)
                 _dialogService = new DialogService(NavigationPage);
-
+           
             SimpleIoc.Default.Register<IDialogService>(() => _dialogService);
 
             if (!_isFirstRun)
