@@ -19,22 +19,22 @@ namespace Mobile.ViewModel
             _appLoader = appLoader;
             _defaultMessenger = defaultMessenger;
 
-            Login = loginModel;
+            Model = loginModel;
         }
 
-        private LoginModel _login = null;
-        public LoginModel Login
+        private LoginModel _model = null;
+        public LoginModel Model
         {
             get
             {
-                return _login;
+                return _model;
             }
             set
             {
-                if (value != _login)
+                if (value != _model)
                 {
-                    _login = value;
-                    RaisePropertyChanged(() => Login);
+                    _model = value;
+                    RaisePropertyChanged(() => Model);
                 }
             }
         }
@@ -50,9 +50,9 @@ namespace Mobile.ViewModel
                            {
                                await _loginCommand.SingleRun(async () =>
                                {
-                                   await Login.Authenticate();
+                                   await Model.Authenticate();
 
-                                   if (Login.IsAuthenticated)
+                                   if (Model.IsAuthenticated)
                                    {
                                        _defaultMessenger.SendNotification("Sent from LoginViewModel", Token.LoggedIn);
                                        await _appLoader.LoadStack(StackEnum.Main);

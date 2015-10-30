@@ -4,9 +4,11 @@
           xmlns:local="clr-namespace:Mobile.View"
           x:Class="Mobile.View.LoginPage">
 
-    <StackLayout>
-        <Label Text="Login Page" />
-        <Button Command="{Binding LoginCommand}" Text="Login" />
-    </StackLayout>
-    
+  <StackLayout>
+    <Label Text="Login Page" />
+    <Entry StyleId="EmailEntry" Text="{Binding Model.Email}" Placeholder="Email (is demo)" />
+    <Entry StyleId="PasswordEntry" Text="{Binding Model.Password}" Placeholder="Password (is demo)" />
+    <Button Command="{Binding LoginCommand}" StyleId="LoginButton" Text="Login" />
+  </StackLayout>
+
 </local:BasePage>
