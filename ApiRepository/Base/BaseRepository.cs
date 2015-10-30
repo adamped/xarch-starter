@@ -3,6 +3,7 @@ using Definition.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,14 @@ namespace ApiRepository
     public class BaseRepository
     {
 
-        protected HttpClient _client = new HttpClient();
+        protected HttpClient _client = null;
+
+        public BaseRepository()
+        {
+            _client = new HttpClient();
+            _client.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.UtcNow.ToString("r")); //Disable caching
+        }
+
 
         protected async Task<Result<TOutbound>> Put<TInbound, TOutbound>(TInbound data, string id, String controller)
         {
