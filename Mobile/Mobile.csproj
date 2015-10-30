@@ -44,6 +44,7 @@
     <Compile Include="Helper\DialogService.cs" />
     <Compile Include="Helper\ExtNavigationPage.cs" />
     <Compile Include="Helper\ExtNavigationService.cs" />
+    <Compile Include="Helper\OperationService.cs" />
     <Compile Include="Helper\PageService.cs" />
     <Compile Include="Messenger\DefaultMessenger.cs" />
     <Compile Include="Model\AboutModel.cs" />

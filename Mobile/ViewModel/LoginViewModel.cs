@@ -2,18 +2,19 @@
 using Definition.Interfaces;
 using Definition.Interfaces.Messenger;
 using GalaSoft.MvvmLight.Command;
+using Mobile.Helper;
 using Mobile.Model;
 using System;
 
 namespace Mobile.ViewModel
 {
-    public class LoginViewModel: BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
 
         private IAppLoader _appLoader = null;
         private IDefaultMessenger _defaultMessenger = null;
 
-        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel, IDefaultMessenger defaultMessenger): base(defaultMessenger)
+        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel, IDefaultMessenger defaultMessenger) : base(defaultMessenger)
         {
             _appLoader = appLoader;
             _defaultMessenger = defaultMessenger;
@@ -47,7 +48,7 @@ namespace Mobile.ViewModel
                        ?? (_loginCommand = new RelayCommand(
                            async () =>
                            {
-                               using (var releaser = await _lock.LockAsync())
+                               await _loginCommand.SingleRun(async () =>
                                {
                                    await Login.Authenticate();
 
@@ -56,7 +57,8 @@ namespace Mobile.ViewModel
                                        _defaultMessenger.SendNotification("Sent from LoginViewModel", Token.LoggedIn);
                                        await _appLoader.LoadStack(StackEnum.Main);
                                    }
-                               }                               
+
+                               });
 
                            }));
             }
