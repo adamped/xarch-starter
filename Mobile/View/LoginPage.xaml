@@ -7,8 +7,8 @@
   <StackLayout>
     <Label Text="Login Page" />
     <Entry StyleId="EmailEntry" Text="{Binding Model.Email}" Placeholder="Email (is demo)" />
-    <Entry StyleId="PasswordEntry" Text="{Binding Model.Password}" Placeholder="Password (is demo)" />
-    <Button Command="{Binding LoginCommand}" StyleId="LoginButton" Text="Login" />
+    <Entry StyleId="PasswordEntry" Text="{Binding Model.Password}" IsPassword="True" Placeholder="Password (is demo)" />
+    <Button Command="{Binding LoginCommand}" StyleId="LoginButton" Text="Login" IsEnabled="{Binding IsBusy, Converter={StaticResource NotConverter}}" />
   </StackLayout>
 
 </local:BasePage>

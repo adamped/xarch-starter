@@ -36,5 +36,8 @@ namespace Mobile.ViewModel
             }
         }
 
+        private bool _isBusy = false;
+        public bool IsBusy { get { return _isBusy; } set { _isBusy = value; RaisePropertyChanged(() => IsBusy); } }
+
     }
 }

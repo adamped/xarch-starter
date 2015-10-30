@@ -50,12 +50,25 @@ namespace Mobile.ViewModel
                            {
                                await _loginCommand.SingleRun(async () =>
                                {
-                                   await Model.Authenticate();
-
-                                   if (Model.IsAuthenticated)
+                                   try
                                    {
-                                       _defaultMessenger.SendNotification("Sent from LoginViewModel", Token.LoggedIn);
-                                       await _appLoader.LoadStack(StackEnum.Main);
+                                       IsBusy = true;
+
+                                       await Model.Authenticate();
+
+                                       if (Model.IsAuthenticated)
+                                       {
+                                           _defaultMessenger.SendNotification("Sent from LoginViewModel", Token.LoggedIn);
+                                           await _appLoader.LoadStack(StackEnum.Main);
+                                       }
+                                       else
+                                       {
+                                           await DialogService.ShowMessage("The login details provided were incorrect. Please try again.", "Login Error");
+                                       }
+                                   }
+                                   finally
+                                   {
+                                       IsBusy = false;
                                    }
 
                                });

@@ -41,6 +41,7 @@
     <Compile Include="AppLoader.cs" />
     <Compile Include="Base\BaseStack.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Converter\NotConverter.cs" />
     <Compile Include="Helper\DialogService.cs" />
     <Compile Include="Helper\ExtNavigationPage.cs" />
     <Compile Include="Helper\ExtNavigationService.cs" />
