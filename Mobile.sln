@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Portable", "2 - Portabl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC2FCBA3-6775-4C43-9032-A72660E2C648}"
 	ProjectSection(SolutionItems) = preProject
+		Attribution.txt = Attribution.txt
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection

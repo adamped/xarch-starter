@@ -5,6 +5,21 @@
     x:Class="Mobile.App">
   <Application.Resources>
     <ResourceDictionary>
+      <Style x:Key="BackgroundImageStyle" TargetType="Image">
+        <Setter Property="Aspect" Value="AspectFill" />
+        <Setter Property="Source" Value="Background.jpg">
+        </Setter>
+      </Style>
+      <Style x:Key="OverlayStyle" TargetType="ContentView">
+        <Setter Property="BackgroundColor" Value="#0173C7" />
+        <Setter Property="Opacity" Value="0.7" />
+      </Style>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
+
+<!--<Setter.Value>
+            <OnPlatform x:TypeArguments="ImageSource">
+              <OnPlatform.WinPhone>Background.jpg</OnPlatform.WinPhone>
+            </OnPlatform>
+          </Setter.Value>-->

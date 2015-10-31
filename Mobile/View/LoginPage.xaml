@@ -3,12 +3,21 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           xmlns:local="clr-namespace:Mobile.View"
           x:Class="Mobile.View.LoginPage">
-
-  <StackLayout>
-    <Label Text="Login Page" />
-    <Entry StyleId="EmailEntry" Text="{Binding Model.Email}" Placeholder="Email (is demo)" />
-    <Entry StyleId="PasswordEntry" Text="{Binding Model.Password}" IsPassword="True" Placeholder="Password (is demo)" />
-    <Button Command="{Binding LoginCommand}" StyleId="LoginButton" Text="Login" IsEnabled="{Binding IsBusy, Converter={StaticResource NotConverter}}" />
-  </StackLayout>
-
+  <Grid>
+    <Image Style="{StaticResource BackgroundImageStyle}" />
+    <ContentView Style="{StaticResource OverlayStyle}" />
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="350" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Image Source="Logo.png" Grid.Row="0" VerticalOptions="End" HorizontalOptions="Center" />
+      <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand">
+        <Entry StyleId="EmailEntry" Text="{Binding Model.Email}" Placeholder="Email (is demo)" />
+        <Entry StyleId="PasswordEntry" Text="{Binding Model.Password}" IsPassword="True" Placeholder="Password (is demo)" />
+        <Button Command="{Binding LoginCommand}" StyleId="LoginButton" Text="Login" IsEnabled="{Binding IsBusy, Converter={StaticResource NotConverter}}" />
+      </StackLayout>
+    </Grid>
+  </Grid>
 </local:BasePage>
