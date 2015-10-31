@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using Definition.Enums;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 
 namespace Definition.Interfaces.Messenger
@@ -6,9 +7,9 @@ namespace Definition.Interfaces.Messenger
     public interface IDefaultMessenger: IMessenger
     {
 
-        void RegisterNotification(object recipient, Action<string> notify);
+        void RegisterNotification(object recipient, Token token, Action<string> notify);
 
-        void SendNotification(string message);
+        void SendNotification(string message, Token token);
 
     }
 }

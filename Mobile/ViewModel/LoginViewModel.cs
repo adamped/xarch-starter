@@ -2,38 +2,39 @@
 using Definition.Interfaces;
 using Definition.Interfaces.Messenger;
 using GalaSoft.MvvmLight.Command;
+using Mobile.Helper;
 using Mobile.Model;
 using System;
 
 namespace Mobile.ViewModel
 {
-    public class LoginViewModel: BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
 
         private IAppLoader _appLoader = null;
         private IDefaultMessenger _defaultMessenger = null;
 
-        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel, IDefaultMessenger defaultMessenger): base(defaultMessenger)
+        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel, IDefaultMessenger defaultMessenger) : base(defaultMessenger)
         {
             _appLoader = appLoader;
             _defaultMessenger = defaultMessenger;
 
-            Login = loginModel;
+            Model = loginModel;
         }
 
-        private LoginModel _login = null;
-        public LoginModel Login
+        private LoginModel _model = null;
+        public LoginModel Model
         {
             get
             {
-                return _login;
+                return _model;
             }
             set
             {
-                if (value != _login)
+                if (value != _model)
                 {
-                    _login = value;
-                    RaisePropertyChanged(() => Login);
+                    _model = value;
+                    RaisePropertyChanged(() => Model);
                 }
             }
         }
@@ -47,16 +48,30 @@ namespace Mobile.ViewModel
                        ?? (_loginCommand = new RelayCommand(
                            async () =>
                            {
-                               using (var releaser = await _lock.LockAsync())
+                               await _loginCommand.SingleRun(async () =>
                                {
-                                   await Login.Authenticate();
-
-                                   if (Login.IsAuthenticated)
+                                   try
                                    {
-                                       _defaultMessenger.Send("Sent from LoginViewModel");
-                                       await _appLoader.LoadStack(StackEnum.Main);
+                                       IsBusy = true;
+
+                                       await Model.Authenticate();
+
+                                       if (Model.IsAuthenticated)
+                                       {
+                                           _defaultMessenger.SendNotification("Sent from LoginViewModel", Token.LoggedIn);
+                                           await _appLoader.LoadStack(StackEnum.Main);
+                                       }
+                                       else
+                                       {
+                                           await DialogService.ShowMessage("The login details provided were incorrect. Please try again.", "Login Error");
+                                       }
                                    }
-                               }                               
+                                   finally
+                                   {
+                                       IsBusy = false;
+                                   }
+
+                               });
 
                            }));
             }

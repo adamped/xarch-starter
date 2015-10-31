@@ -26,14 +26,17 @@ namespace ApiRepository.Repository
         {
 
             // Fake API Call Delay
-            await Task.Delay(200);
+            await Task.Delay(500);
 
-            // Return fake results. Use POST to make an actual API call
-            return new Result<string>()
-            {
-                Success = true,
-                Value = "ExampleToken"
-            };
+            if (email == "demo" && password == "demo")
+                // Return fake results. Use POST to make an actual API call
+                return new Result<string>()
+                {
+                    Success = true,
+                    Value = "ExampleToken"
+                };
+            else
+                return new Result<string>() { Success = false };
 
 
         }

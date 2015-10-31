@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:local="clr-namespace:Mobile.View"
           x:Class="Mobile.View.LoginPage">
 
-    <StackLayout>
-        <Label Text="Login Page" />
-        <Button Command="{Binding LoginCommand}" Text="Login" />
-    </StackLayout>
-    
-</BasePage>
+  <StackLayout>
+    <Label Text="Login Page" />
+    <Entry StyleId="EmailEntry" Text="{Binding Model.Email}" Placeholder="Email (is demo)" />
+    <Entry StyleId="PasswordEntry" Text="{Binding Model.Password}" IsPassword="True" Placeholder="Password (is demo)" />
+    <Button Command="{Binding LoginCommand}" StyleId="LoginButton" Text="Login" IsEnabled="{Binding IsBusy, Converter={StaticResource NotConverter}}" />
+  </StackLayout>
+
+</local:BasePage>

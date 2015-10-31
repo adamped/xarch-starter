@@ -1,4 +1,5 @@
 ﻿using Definition.Interfaces;
+using Mobile.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,28 @@ namespace Mobile.View
         {
             InitializeComponent();
             PageInstanceId = Guid.NewGuid();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var bindingContext = BindingContext as BaseViewModel;
+
+            if (bindingContext != null)
+                bindingContext.OnAppearing();
+
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            var bindingContext = BindingContext as BaseViewModel;
+
+            if (bindingContext != null)
+                bindingContext.OnDisappearing();
+
         }
 
         public virtual void Cleanup() { }

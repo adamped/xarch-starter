@@ -9,13 +9,16 @@ namespace Mobile.ViewModel
     public class BaseViewModel : ViewModelBase
     {
         protected AsyncLock _lock = new AsyncLock();
-
-
+        
         public BaseViewModel() { }
         
         public BaseViewModel(GalaSoft.MvvmLight.Messaging.IMessenger messenger) : base(messenger) { }
 
         public virtual void Subscribe() { }
+
+        public virtual void OnAppearing() { }
+
+        public virtual void OnDisappearing() { }
       
         protected IExtNavigationService NavigationService
         {
@@ -32,6 +35,9 @@ namespace Mobile.ViewModel
                 return ServiceLocator.Current.GetInstance<IDialogService>();
             }
         }
+
+        private bool _isBusy = false;
+        public bool IsBusy { get { return _isBusy; } set { _isBusy = value; RaisePropertyChanged(() => IsBusy); } }
 
     }
 }
