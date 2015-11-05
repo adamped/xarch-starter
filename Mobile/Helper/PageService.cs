@@ -13,6 +13,11 @@ namespace Mobile.Helper
 
         private readonly IDictionary<Type, Type> _pagesByType = new Dictionary<Type, Type>();
 
+        public Object GetBindingContext(Type pageType)
+        {
+            return ServiceLocator.Current.GetInstance<object>(_pagesByType[pageType].ToString());
+        }
+
         public Page Build(Type pageType, object parameter)
         {
             ConstructorInfo constructor = null;
@@ -52,14 +57,14 @@ namespace Mobile.Helper
 
             // Assign Binding Context
             if (_pagesByType.ContainsKey(pageType))
-                page.BindingContext = ServiceLocator.Current.GetInstance<object>(_pagesByType[pageType].ToString());
+                page.BindingContext = GetBindingContext(pageType);
             else
                 throw new InvalidOperationException(
                     "No suitable view model found for page " + pageType.ToString());
 
             return page;
         }
-               
+
         public void Map(Type pageType, Type viewModelType)
         {
             lock (_pagesByType)
