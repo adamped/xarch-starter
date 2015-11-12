@@ -1,5 +1,6 @@
 ﻿using Definition.Interfaces;
 using Microsoft.Practices.ServiceLocation;
+using Mobile.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,14 @@ namespace Mobile.Helper
 
             // Assign Binding Context
             if (_pagesByType.ContainsKey(pageType))
+            {
                 page.BindingContext = GetBindingContext(pageType);
+
+                // Pass parameter to view model
+                var model = page.BindingContext as BaseViewModel;
+                if (model != null)
+                    model.OnNavigated(parameter);
+            }
             else
                 throw new InvalidOperationException(
                     "No suitable view model found for page " + pageType.ToString());

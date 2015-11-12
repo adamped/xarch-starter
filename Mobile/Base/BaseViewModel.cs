@@ -3,6 +3,7 @@ using Definition.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using System.Threading.Tasks;
 
 namespace Mobile.ViewModel
 {
@@ -19,6 +20,8 @@ namespace Mobile.ViewModel
         public virtual void OnAppearing() { }
 
         public virtual void OnDisappearing() { }
+
+        public virtual Task OnNavigated(object parameter) { return new Task(() => { return; }); }
       
         protected IExtNavigationService NavigationService
         {

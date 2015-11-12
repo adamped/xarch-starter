@@ -13,6 +13,7 @@ namespace Definition.Interfaces
 
         Page Build(Type pageType, object parameter);
 
-        Object GetBindingContext(Type pageType);
+        object GetBindingContext(Type pageType);
+        
     }
 }

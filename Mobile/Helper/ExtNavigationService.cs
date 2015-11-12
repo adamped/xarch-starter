@@ -65,6 +65,9 @@ namespace Mobile.Helper
 
                     var page = _pageService.Build(type, parameter);
 
+                    if (page == null)
+                        throw new Exception(String.Format("Unable to build page {0}", type.ToString()));
+                    
                     var tabbedPage = page as TabbedPage;
                     if (tabbedPage != null)
                         foreach (var child in tabbedPage.Children)
