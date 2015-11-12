@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Mobile.Helper
@@ -19,7 +20,7 @@ namespace Mobile.Helper
             return ServiceLocator.Current.GetInstance<object>(_pagesByType[pageType].ToString());
         }
 
-        public Page Build(Type pageType, object parameter)
+        public async Task<Page> Build(Type pageType, object parameter)
         {
             ConstructorInfo constructor = null;
             object[] parameters = null;
@@ -64,7 +65,7 @@ namespace Mobile.Helper
                 // Pass parameter to view model
                 var model = page.BindingContext as BaseViewModel;
                 if (model != null)
-                    model.OnNavigated(parameter);
+                    await model.OnNavigated(parameter);
             }
             else
                 throw new InvalidOperationException(

@@ -63,7 +63,7 @@ namespace Mobile.Helper
                 {
                     var type = _pagesByKey[pageKey];
 
-                    var page = _pageService.Build(type, parameter);
+                    var page = await _pageService.Build(type, parameter);
 
                     if (page == null)
                         throw new Exception(String.Format("Unable to build page {0}", type.ToString()));
