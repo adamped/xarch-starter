@@ -6,14 +6,14 @@ namespace Mobile.Messenger
 {
     public class DefaultMessenger : GalaSoft.MvvmLight.Messaging.Messenger, IDefaultMessenger
     {
-        public void RegisterNotification(object recipient, Token token, Action<string> action)
+        public void RegisterNotification<T>(object recipient, Token token, Action<T> action)
         {
-            Register<string>(recipient, token, action);            
+            Register<T>(recipient, token, action);            
         }
 
-        public void SendNotification(string message, Token token)
+        public void SendNotification<T>(T message, Token token)
         {
-            Send<string>(message, token);
+            Send(message, token);
         }
     }
 }

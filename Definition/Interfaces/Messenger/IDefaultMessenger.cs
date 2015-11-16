@@ -7,9 +7,9 @@ namespace Definition.Interfaces.Messenger
     public interface IDefaultMessenger: IMessenger
     {
 
-        void RegisterNotification(object recipient, Token token, Action<string> notify);
+        void RegisterNotification<T>(object recipient, Token token, Action<T> notify);
 
-        void SendNotification(string message, Token token);
+        void SendNotification<T>(T message, Token token);
 
     }
 }
