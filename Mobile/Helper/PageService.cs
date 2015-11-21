@@ -1,9 +1,11 @@
 ﻿using Definition.Interfaces;
 using Microsoft.Practices.ServiceLocation;
+using Mobile.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Mobile.Helper
@@ -13,7 +15,12 @@ namespace Mobile.Helper
 
         private readonly IDictionary<Type, Type> _pagesByType = new Dictionary<Type, Type>();
 
-        public Page Build(Type pageType, object parameter)
+        public Object GetBindingContext(Type pageType)
+        {
+            return ServiceLocator.Current.GetInstance<object>(_pagesByType[pageType].ToString());
+        }
+
+        public async Task<Page> Build(Type pageType, object parameter)
         {
             ConstructorInfo constructor = null;
             object[] parameters = null;
@@ -52,14 +59,21 @@ namespace Mobile.Helper
 
             // Assign Binding Context
             if (_pagesByType.ContainsKey(pageType))
-                page.BindingContext = ServiceLocator.Current.GetInstance<object>(_pagesByType[pageType].ToString());
+            {
+                page.BindingContext = GetBindingContext(pageType);
+
+                // Pass parameter to view model
+                var model = page.BindingContext as BaseViewModel;
+                if (model != null)
+                    await model.OnNavigated(parameter);
+            }
             else
                 throw new InvalidOperationException(
                     "No suitable view model found for page " + pageType.ToString());
 
             return page;
         }
-               
+
         public void Map(Type pageType, Type viewModelType)
         {
             lock (_pagesByType)

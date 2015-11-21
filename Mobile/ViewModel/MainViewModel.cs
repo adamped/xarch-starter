@@ -19,7 +19,7 @@ namespace Mobile.ViewModel
 
         public override void Subscribe()
         {
-            _defaultMessenger.RegisterNotification(this, Token.LoggedIn, ReceiveNotification);
+            _defaultMessenger.RegisterNotification<string>(this, Token.LoggedIn, ReceiveNotification);
         }
 
         private void ReceiveNotification(string message)

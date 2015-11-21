@@ -11,6 +11,9 @@ namespace Definition.Interfaces
     {
         void Map(Type pageType, Type viewModelType);
 
-        Page Build(Type pageType, object parameter);
+        Task<Page> Build(Type pageType, object parameter);
+
+        object GetBindingContext(Type pageType);
+        
     }
 }

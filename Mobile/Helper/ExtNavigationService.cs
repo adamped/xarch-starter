@@ -30,9 +30,7 @@ namespace Mobile.Helper
                 lock (_pagesByKey)
                 {
                     if (_navigation.CurrentPage == null)
-                    {
                         return null;
-                    }
 
                     var pageType = _navigation.CurrentPage.GetType();
 
@@ -65,7 +63,15 @@ namespace Mobile.Helper
                 {
                     var type = _pagesByKey[pageKey];
 
-                    var page = _pageService.Build(type, parameter);
+                    var page = await _pageService.Build(type, parameter);
+
+                    if (page == null)
+                        throw new Exception(String.Format("Unable to build page {0}", type.ToString()));
+                    
+                    var tabbedPage = page as TabbedPage;
+                    if (tabbedPage != null)
+                        foreach (var child in tabbedPage.Children)
+                            child.BindingContext = _pageService.GetBindingContext(child.GetType());
 
                     await _navigation.PushAsync(page, animated);
                 }
@@ -85,13 +91,9 @@ namespace Mobile.Helper
             lock (_pagesByKey)
             {
                 if (_pagesByKey.ContainsKey(pageKey))
-                {
                     _pagesByKey[pageKey] = pageType;
-                }
                 else
-                {
                     _pagesByKey.Add(pageKey, pageType);
-                }
             }
         }
 

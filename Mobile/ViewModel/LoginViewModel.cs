@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using Mobile.Helper;
 using Mobile.Model;
 using System;
+using System.Threading.Tasks;
 
 namespace Mobile.ViewModel
 {
@@ -18,7 +19,7 @@ namespace Mobile.ViewModel
         {
             _appLoader = appLoader;
             _defaultMessenger = defaultMessenger;
-
+            
             Model = loginModel;
         }
 
