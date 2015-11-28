@@ -20,23 +20,22 @@ namespace Mobile
         public App()
         {
             InitializeComponent();
-         
+        }
+
+        protected async override void OnStart()
+        {
+            // Handle when your app starts
+
             // Set default ServiceLocatorProvider 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // Initialize Services and Stack
-            var appLoader = new AppLoader();            
+            var appLoader = new AppLoader();
             SimpleIoc.Default.Register<IAppLoader>(() => appLoader);
             appLoader.InitializeViewModels();
-           
+
             // Load initial navigation stack
-            ServiceLocator.Current.GetInstance<IAppLoader>().LoadStack(StackEnum.Authentication).Wait();
-
-        }
-
-        protected override void OnStart()
-        {
-            // Handle when your app starts
+            await ServiceLocator.Current.GetInstance<IAppLoader>().LoadStack(StackEnum.Authentication);
         }
 
         protected override void OnSleep()

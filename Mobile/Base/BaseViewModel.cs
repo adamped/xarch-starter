@@ -21,7 +21,7 @@ namespace Mobile.ViewModel
 
         public virtual void OnDisappearing() { }
 
-        public virtual Task OnNavigated(object parameter) { return new Task(() => { return; }); }
+        public virtual Task OnNavigated(object parameter) { return Task.Run(()=> { }); }
       
         protected IExtNavigationService NavigationService
         {
