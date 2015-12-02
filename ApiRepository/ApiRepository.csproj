@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dto\ExampleDto.cs" />
+    <Compile Include="Dto\ExampleDto.ContainerDto.cs">
+      <DependentUpon>ExampleDto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repository\AuthenticationRepository.cs" />
     <Compile Include="Base\BaseRepository.cs" />
     <Compile Include="Repository\ExampleRepository.cs" />
