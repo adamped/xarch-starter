@@ -9,7 +9,7 @@ namespace ApiRepository.Dto
     public class ExampleDto
     {
 
-        public List<SubExampleDto> Container { get; set; }
+        
 
     }
 }

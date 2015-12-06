@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApiRepository.Dto
 {
-    public class SubExampleDto
+    public class ContainerDto
     {
         public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }
