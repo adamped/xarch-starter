@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mobile.Model
+namespace ApiRepository.Dto
 {
-    public class MainModel: BaseModel
+    public class SubExampleDto
     {
-
-       
-
+        public string Name { get; set; }
     }
 }

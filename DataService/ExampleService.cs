@@ -17,6 +17,13 @@ namespace DataService
 
         public string GetData()
         {
+
+            // Call Repository get DTO's back
+
+            // AutoMapper to Model reference (generic)
+
+            
+
             return _exampleRepository.GetData();
         }
     }

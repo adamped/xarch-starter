@@ -27,8 +27,13 @@ namespace ApiRepository.Repository
         }
 
 
-        public string GetData()
+        public string GetData() //(object model)
         {
+            // AutoMap DTO back to model
+            //AutoMapper.Mapper.CreateMap(typeof(dto), model.GetType())
+
+            // Unit of Work to get from API
+
             return "Test Data From Repository"; // Call GET from BaseRepository to actually connect to an API
         }
 

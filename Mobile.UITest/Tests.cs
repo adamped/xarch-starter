@@ -29,6 +29,7 @@ namespace Mobile.UITest
         public void AppLaunches()
         {
             app.Screenshot("First screen.");
+     
         }
     }
 }
