@@ -20,6 +20,7 @@ namespace Mobile
         public App()
         {
             InitializeComponent();
+            App.Current.MainPage = new ContentPage();
         }
 
         protected async override void OnStart()
