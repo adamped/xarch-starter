@@ -20,6 +20,16 @@ namespace Mobile.View
             PageInstanceId = Guid.NewGuid();
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            var bindingContext = BindingContext as BaseViewModel;
+
+            if (bindingContext != null)
+                bindingContext.OnBackButtonPressed();
+
+            return base.OnBackButtonPressed();
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

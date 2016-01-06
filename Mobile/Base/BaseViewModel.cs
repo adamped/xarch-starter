@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Mobile.ViewModel
 {
@@ -21,6 +22,10 @@ namespace Mobile.ViewModel
         public virtual void OnAppearing() { }
 
         public virtual void OnDisappearing() { }
+
+        public virtual void OnBackButtonPressed() { }
+
+        public virtual void OnPopped(Page page) { }
 
         public virtual Task OnNavigated(object parameter) { return Task.Run(() => { }); }
 

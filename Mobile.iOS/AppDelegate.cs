@@ -30,15 +30,16 @@ namespace Mobile.iOS
                 {
                     e.NativeView.AccessibilityIdentifier = e.View.StyleId;
                 }
+                
             };
-
+            
             LoadApplication(new App());
 
 #if ENABLE_TEST_CLOUD
 // requires Xamarin Test Cloud Agent
 Xamarin.Calabash.Start();
 #endif
-
+            
             return base.FinishedLaunching(app, options);
         }
     }

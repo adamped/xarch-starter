@@ -1,17 +1,8 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using Mobile.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Mobile.View;
-using Definition.Enums;
-using Microsoft.Practices.ServiceLocation;
-using GalaSoft.MvvmLight.Views;
-
+﻿using Definition.Enums;
 using Definition.Interfaces;
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
+using Xamarin.Forms;
 
 namespace Mobile
 {
@@ -20,16 +11,15 @@ namespace Mobile
         public App()
         {
             InitializeComponent();
-            App.Current.MainPage = new ContentPage();
+            App.Current.MainPage = new ContentPage(); // Needs a page even if empty for the moment
+
+            // Set default ServiceLocatorProvider 
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+         
         }
 
         protected async override void OnStart()
         {
-            // Handle when your app starts
-
-            // Set default ServiceLocatorProvider 
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
             // Initialize Services and Stack
             var appLoader = new AppLoader();
             SimpleIoc.Default.Register<IAppLoader>(() => appLoader);

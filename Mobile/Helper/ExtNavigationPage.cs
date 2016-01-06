@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Definition.Interfaces;
+using Mobile.ViewModel;
 
 namespace Mobile.Helper
 {
@@ -33,6 +34,10 @@ namespace Mobile.Helper
 
                 if (e.Page != null)
                 {
+                    var viewModel = e.Page.BindingContext as BaseViewModel;
+                    if (viewModel != null)
+                        viewModel.OnPopped(e.Page);
+
                     e.Page.BindingContext = null;
                     if (e.Page.ToolbarItems != null)
                         e.Page.ToolbarItems.Clear();
