@@ -23,8 +23,19 @@ namespace DataService
         {
             var result = await _authenticationRepository.Login(email, password);
 
+            // Inject token into authorization headers
+            if (result.Success)
+                foreach (var repository in _repositories)
+                    repository.InjectAuthorizationHeader(result.Value);
+
             return result.Success;
         }
 
+        private List<IAuthRepository> _repositories = new List<IAuthRepository>();
+        public void InjectAuthorization(IAuthRepository authRepository)
+        {
+            if (!_repositories.Contains(authRepository))
+                _repositories.Add(authRepository);
+        }
     }
 }

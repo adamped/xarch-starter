@@ -1,5 +1,7 @@
-﻿using Definition.Interfaces;
+﻿using Definition.Dto;
+using Definition.Interfaces;
 using Definition.Interfaces.Repository;
+using System.Collections.Generic;
 
 namespace DataService
 {
@@ -15,14 +17,10 @@ namespace DataService
             _exampleRepository = exampleRepository;
         }
 
-        public string GetData()
+        public List<ExampleDto> GetData()
         {
-
-            // Call Repository get DTO's back
-
-            // AutoMapper to Model reference (generic)
-
-            
+            // You could call other services or do some data aggregation or manipulation at this point.
+            // Otherwise you might as well call direct to the repository
 
             return _exampleRepository.GetData();
         }

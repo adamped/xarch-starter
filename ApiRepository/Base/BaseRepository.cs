@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,12 +16,25 @@ namespace ApiRepository
 
         protected HttpClient _client = null;
 
-        public BaseRepository()
+        public BaseRepository(string baseUrl, string entity)
         {
             _client = new HttpClient();
             _client.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.UtcNow.ToString("r")); //Disable caching
-        }
 
+            _client.DefaultRequestHeaders
+                             .Accept
+                             .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            if (baseUrl.EndsWith("/"))
+                baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+
+            if (entity.StartsWith("/"))
+                entity = entity.Substring(1);
+
+            _client.BaseAddress = new Uri(baseUrl + "/" + entity);
+        }
+        
 
         protected async Task<Result<TOutbound>> Put<TInbound, TOutbound>(TInbound data, string id, String controller)
         {
@@ -172,6 +186,11 @@ namespace ApiRepository
 
                 return error;
             }
+        }
+
+        public void InjectAuthorizationHeader(string token)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
     }

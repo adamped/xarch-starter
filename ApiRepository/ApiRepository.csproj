@@ -35,15 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Dto\ExampleDto.cs" />
-    <Compile Include="Dto\ExampleDto.ContainerDto.cs">
-      <DependentUpon>ExampleDto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Repository\AuthenticationRepository.cs" />
+    <Compile Include="Repository\Authentication\Base.cs" />
     <Compile Include="Base\BaseRepository.cs" />
-    <Compile Include="Repository\ExampleRepository.cs" />
+    <Compile Include="Repository\Authentication\Login.cs" />
+    <Compile Include="Repository\Example\Base.cs" />
     <Compile Include="Extensions\ToQueryString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Example\GetData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Definition\Definition.csproj">

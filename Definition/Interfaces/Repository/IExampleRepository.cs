@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Definition.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Definition.Interfaces.Repository
 {
     public interface IExampleRepository: IAuthRepository
     {
-        string GetData();
+        List<ExampleDto> GetData();
     }
 }

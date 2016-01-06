@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dto\ExampleDto.cs" />
     <Compile Include="Enums\Stack.cs" />
     <Compile Include="Enums\Token.cs" />
     <Compile Include="Interfaces\IAppLoader.cs" />

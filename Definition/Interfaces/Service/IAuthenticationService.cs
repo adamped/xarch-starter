@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Definition.Interfaces.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,7 @@ namespace Definition.Interfaces.Service
     public interface IAuthenticationService
     {
         Task<bool> Authenticate(string email, string password);
+               
+        void InjectAuthorization(IAuthRepository authRepository);
     }
 }

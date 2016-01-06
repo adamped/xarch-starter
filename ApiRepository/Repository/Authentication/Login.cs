@@ -1,26 +1,14 @@
-﻿using Definition.Interfaces.Repository;
-using Definition.Model;
+﻿using Definition.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiRepository.Repository
 {
-    public class AuthenticationRepository : BaseRepository, IAuthenticationRepository
+    public partial class AuthenticationRepository
     {
-
-        public AuthenticationRepository(string baseUrl)
-        {
-            _client.DefaultRequestHeaders
-                              .Accept
-                              .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            _client.BaseAddress = new Uri(baseUrl);
-        }
-
 
         public async Task<Result<string>> Login(string email, string password)
         {
@@ -43,4 +31,3 @@ namespace ApiRepository.Repository
 
     }
 }
-

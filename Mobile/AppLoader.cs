@@ -41,12 +41,32 @@ namespace Mobile
             // Load Data Services
             InitializeDataServices();
 
+            // Register Repositories for Authorization Header Injection
+            RegisterAuthRepositories();
+
             // Load Messengers
             InitializeMessengers();
 
             // Load Models
             InitializeModels();
-            
+
+        }
+
+        /// <summary>
+        /// Helper function to check if already registered before trying again
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        private void RegisterOnce<T>(Func<T> func) where T : class
+        {
+            if (!SimpleIoc.Default.IsRegistered<T>())
+                SimpleIoc.Default.Register(func);
+        }
+
+        private void RegisterAuthRepository<T>() where T : IAuthRepository
+        {
+            var authorizationService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
+            authorizationService.InjectAuthorization(ServiceLocator.Current.GetInstance<T>());
         }
 
         /// <summary>
@@ -58,30 +78,36 @@ namespace Mobile
             _stacks.Add(StackEnum.Authentication, new AuthenticationStack());
             _stacks.Add(StackEnum.Main, new MainStack());
         }
-        
+
         private void InitializeRepositories()
         {
-            SimpleIoc.Default.Register<IAuthenticationRepository>(() => new AuthenticationRepository(Config.BaseUrl));
-            SimpleIoc.Default.Register<IExampleRepository>(() => new ExampleRepository(Config.BaseUrl, "examples"));
+            RegisterOnce<IAuthenticationRepository>(() => new AuthenticationRepository(Config.BaseUrl, ""));
+            RegisterOnce<IExampleRepository>(() => new ExampleRepository(Config.BaseUrl, "examples"));
         }
 
         private void InitializeDataServices()
         {
-            SimpleIoc.Default.Register<IAuthenticationService>(() => new AuthenticationService(ServiceLocator.Current.GetInstance<IAuthenticationRepository>()));
-            SimpleIoc.Default.Register<IExampleService>(() => new ExampleService(ServiceLocator.Current.GetInstance<IExampleRepository>()));
+            RegisterOnce<IAuthenticationService>(() => new AuthenticationService(ServiceLocator.Current.GetInstance<IAuthenticationRepository>()));
+            RegisterOnce<IExampleService>(() => new ExampleService(ServiceLocator.Current.GetInstance<IExampleRepository>()));
+            
         }
-        
+
+        private void RegisterAuthRepositories()
+        {
+            RegisterAuthRepository<IExampleRepository>();
+        }
+
         private void InitializeMessengers()
         {
-            SimpleIoc.Default.Register<IDefaultMessenger>(() => new DefaultMessenger());
+            RegisterOnce<IDefaultMessenger>(() => new DefaultMessenger());
         }
 
         private void InitializeModels()
         {
-            SimpleIoc.Default.Register(() => new LoginModel(ServiceLocator.Current.GetInstance<IAuthenticationService>()));
-            SimpleIoc.Default.Register(() => new MainModel());
+            RegisterOnce(() => new LoginModel(ServiceLocator.Current.GetInstance<IAuthenticationService>()));
+            RegisterOnce(() => new MainModel());
         }
-      
+
 
         /// <summary>
         /// Automatically create an instance of and register any ViewModel found in the namespace
@@ -102,7 +128,7 @@ namespace Mobile
                 object instance = null;
 
                 if (defaultConstructor.GetParameters().Count() == 0)
-                   instance = (BaseViewModel)Activator.CreateInstance(t.AsType());
+                    instance = (BaseViewModel)Activator.CreateInstance(t.AsType());
                 else
                 {
                     List<object> parameters = new List<object>();
