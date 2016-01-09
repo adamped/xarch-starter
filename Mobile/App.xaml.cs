@@ -2,6 +2,7 @@
 using Definition.Interfaces;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Mobile.Styles;
 using Xamarin.Forms;
 
 namespace Mobile
@@ -12,7 +13,7 @@ namespace Mobile
         {
             InitializeComponent();
             App.Current.MainPage = new ContentPage(); // Needs a page even if empty for the moment
-
+  
             // Set default ServiceLocatorProvider 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
          
@@ -32,6 +33,7 @@ namespace Mobile
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+
         }
 
         protected override void OnResume()

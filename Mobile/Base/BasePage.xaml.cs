@@ -12,12 +12,41 @@ namespace Mobile.View
     public partial class BasePage : ContentPage, ICleanupPage
     {
 
+        public string StyleSheet { get; set; }
+
         public Guid PageInstanceId { get; set; }
 
         public BasePage()
         {
             InitializeComponent();
-            PageInstanceId = Guid.NewGuid();
+            PageInstanceId = Guid.NewGuid();                
+        }
+
+        private bool _initialView = true;
+
+        protected void LoadStyles()
+        {
+
+            if (!_initialView)
+                return;
+
+            _initialView = false;
+
+            if (!String.IsNullOrEmpty(this.StyleSheet))
+            {
+                try
+                {
+                    var stylesheet = Activator.CreateInstance(Type.GetType(this.StyleSheet)) as VisualElement;
+                    
+                    foreach (var resource in stylesheet.Resources)
+                        this.Resources.Add(resource.Key, resource.Value);
+
+                }
+                catch
+                {
+                    // Failed to add stylesheet
+                }
+            }
         }
 
         protected override bool OnBackButtonPressed()
@@ -38,6 +67,8 @@ namespace Mobile.View
 
             if (bindingContext != null)
                 bindingContext.OnAppearing();
+
+            LoadStyles();
 
         }
 

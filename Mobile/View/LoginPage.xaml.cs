@@ -1,4 +1,5 @@
-﻿using Mobile.ViewModel;
+﻿using Mobile.Styles;
+using Mobile.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Mobile.View
 {
     public partial class LoginPage : BasePage
     {
+
         public LoginPage()
         {
             InitializeComponent();

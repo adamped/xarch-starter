@@ -57,6 +57,9 @@
     <Compile Include="PageLocator.cs" />
     <Compile Include="Stack\AuthenticationStack.cs" />
     <Compile Include="Stack\MainStack.cs" />
+    <Compile Include="Styles\LoginStyles.xaml.cs">
+      <DependentUpon>LoginStyles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -172,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Styles\LoginStyles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

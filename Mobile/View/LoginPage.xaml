@@ -2,9 +2,10 @@
 <local:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           xmlns:local="clr-namespace:Mobile.View"
+          StyleSheet="Mobile.Styles.LoginStyles"
           x:Class="Mobile.View.LoginPage">
   <Grid>
-    <Image Style="{StaticResource BackgroundImageStyle}" />
+    <Image Style="{DynamicResource BackgroundImageStyle}" />
     <ContentView Style="{StaticResource OverlayStyle}" />
     <Grid>
       <Grid.RowDefinitions>

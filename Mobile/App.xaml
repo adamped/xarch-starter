@@ -5,21 +5,23 @@
     x:Class="Mobile.App">
   <Application.Resources>
     <ResourceDictionary>
-      <Style x:Key="BackgroundImageStyle" TargetType="Image">
-        <Setter Property="Aspect" Value="AspectFill" />
-        <Setter Property="Source" Value="Background.jpg">
-        </Setter>
-      </Style>
+      <!-- These settings are all the same and just here for examples of changing per platform -->
       <Style x:Key="OverlayStyle" TargetType="ContentView">
-        <Setter Property="BackgroundColor" Value="#0173C7" />
-        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="BackgroundColor">
+          <Setter.Value>
+            <OnPlatform x:TypeArguments="Color">
+              <OnPlatform.WinPhone>#0173C7</OnPlatform.WinPhone>
+              <OnPlatform.Android>#0173C7</OnPlatform.Android>
+              <OnPlatform.iOS>#0173C7</OnPlatform.iOS>
+            </OnPlatform>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="Opacity">
+          <Setter.Value>
+            <OnPlatform x:TypeArguments="x:Double" Android="0.7" iOS="0.7" WinPhone="0.7" />
+          </Setter.Value>
+        </Setter>
       </Style>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
-
-<!--<Setter.Value>
-            <OnPlatform x:TypeArguments="ImageSource">
-              <OnPlatform.WinPhone>Background.jpg</OnPlatform.WinPhone>
-            </OnPlatform>
-          </Setter.Value>-->
