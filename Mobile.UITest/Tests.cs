@@ -29,7 +29,11 @@ namespace Mobile.UITest
         public void AppLaunches()
         {
             app.Screenshot("First screen.");
-     
+
+            var screen = new Screen.Login(app);
+
+            Assert.AreEqual("my@email.com", screen.GetEmailText());
+
         }
     }
 }
