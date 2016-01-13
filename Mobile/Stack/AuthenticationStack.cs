@@ -13,7 +13,12 @@ namespace Mobile.Stack
 
         public AuthenticationStack()
         {
-            MainPage = NavigationPage = new NavigationPage();          
+            var navPage = new NavigationPage();
+
+            // Disable NavigationBar on all pages within this Stack.
+            navPage.Pushed += (s, e) => { NavigationPage.SetHasNavigationBar(e.Page, false); };
+            
+            MainPage = NavigationPage = navPage;
         }
 
         protected override void MapPages()
@@ -33,6 +38,6 @@ namespace Mobile.Stack
                 return _locator.LoginPage;
             }
         }
-        
+
     }
 }

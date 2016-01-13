@@ -36,7 +36,7 @@ namespace Mobile.WinUniversal
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-
+            
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -48,12 +48,12 @@ namespace Mobile.WinUniversal
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+                Xamarin.Forms.Forms.Init(e);
+
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }
-
-                Xamarin.Forms.Forms.Init(e);
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;

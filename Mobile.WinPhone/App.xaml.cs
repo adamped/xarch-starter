@@ -31,7 +31,7 @@ namespace Mobile.WinPhone
 
             // Phone-specific initialization
             InitializePhoneApplication();
-
+       
             // Language display initialization
             InitializeLanguage();
 
