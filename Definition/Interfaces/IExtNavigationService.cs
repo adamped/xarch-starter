@@ -10,7 +10,7 @@ namespace Definition.Interfaces
     {
         Task NavigateTo(string pageKey);
 
-        Task NavigateTo(string pageKey, object parameter);
+        Task NavigateTo(string pageKey, INavigationArgs navigationArgs);
 
         bool CanGoBack();
 

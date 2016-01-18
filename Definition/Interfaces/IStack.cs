@@ -14,6 +14,6 @@ namespace Definition.Interfaces
 
         NavigationPage NavigationPage { get; }
 
-        Task RegisterServices();
+        Task RegisterServices(INavigationArgs navigationArgs = null);
     }
 }

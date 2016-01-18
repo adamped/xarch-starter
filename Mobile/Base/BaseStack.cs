@@ -22,7 +22,7 @@ namespace Mobile.Stack
         /// <summary>
         /// Will register appropriate Services for Dependency Injection.
         /// </summary>
-        public async Task RegisterServices()
+        public async Task RegisterServices(INavigationArgs navigationArgs = null)
         {
             if (_pageService == null)
                 _pageService = new PageService();
@@ -42,7 +42,7 @@ namespace Mobile.Stack
                 MapPages();
                 MapViewModels();
 
-                await _navigationService.NavigateTo(NavigationStartPageKey);
+                await _navigationService.NavigateTo(NavigationStartPageKey, navigationArgs);
 
                 _isFirstRun = true;
             }
