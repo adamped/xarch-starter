@@ -153,7 +153,7 @@ namespace Mobile
         /// Changes the MainPage of the mobile app to the chosen stack
         /// </summary>
         /// <param name="stack"></param>
-        public async Task LoadStack(StackEnum stack)
+        public async Task LoadStack(StackEnum stack, INavigationArgs navigationArgs = null)
         {
             using (var releaser = await _lock.LockAsync())
             {
@@ -166,7 +166,7 @@ namespace Mobile
                 var stackInstance = _stacks[stack];
 
                 // Register Services
-                await stackInstance.RegisterServices();
+                await stackInstance.RegisterServices(navigationArgs);
 
                 // Change MainPage
                 App.Current.MainPage = stackInstance.MainPage;

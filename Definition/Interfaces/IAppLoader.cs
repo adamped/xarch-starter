@@ -10,7 +10,7 @@ namespace Definition.Interfaces
     public interface IAppLoader
     {
 
-        Task LoadStack(StackEnum stack);
+        Task LoadStack(StackEnum stack, INavigationArgs navigationArgs = null);
 
     }
 }
