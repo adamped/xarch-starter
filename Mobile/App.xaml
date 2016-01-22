@@ -5,6 +5,11 @@
     x:Class="Mobile.App">
   <Application.Resources>
     <ResourceDictionary>
+      <Style x:Key="BackgroundImageStyle" TargetType="Image">
+        <Setter Property="Aspect" Value="AspectFill" />
+        <Setter Property="Source" Value="Background.jpg" />
+      </Style>    
+
       <!-- These settings are all the same and just here for examples of changing per platform -->
       <Style x:Key="OverlayStyle" TargetType="ContentView">
         <Setter Property="BackgroundColor">

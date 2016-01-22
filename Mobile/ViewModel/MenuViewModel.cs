@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Definition.Interfaces;
+﻿using Definition.Interfaces;
+using Definition.Interfaces.Messenger;
+using GalaSoft.MvvmLight.Views;
+using Mobile.Model;
 
 namespace Mobile.ViewModel
 {
     public class MenuViewModel : BaseViewModel
     {
-       
+        public MenuViewModel(MenuModel model, IDefaultMessenger defaultMessenger,
+                             IExtNavigationService navigationService, IDialogService dialogService)
+             : base(defaultMessenger, model, navigationService, dialogService)
+        { }
+
     }
 }

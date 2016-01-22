@@ -1,8 +1,9 @@
 ﻿using Definition.Enums;
+using Definition.Interfaces;
 using Definition.Interfaces.Messenger;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using Mobile.Model;
-using System;
 
 namespace Mobile.ViewModel
 {
@@ -10,10 +11,13 @@ namespace Mobile.ViewModel
     {
         private IDefaultMessenger _defaultMessenger = null;
 
-        public MainViewModel(MainModel mainModel, IDefaultMessenger defaultMessenger) : base(defaultMessenger)
+        public MainViewModel(MainModel model, IDefaultMessenger defaultMessenger, 
+                             IExtNavigationService navigationService, IDialogService dialogService) 
+             : base(defaultMessenger, model, navigationService, dialogService)
         {
-            MainModel = mainModel;
             _defaultMessenger = defaultMessenger;
+
+            Model = model;
         }
 
 
@@ -42,7 +46,7 @@ namespace Mobile.ViewModel
         }
 
         private MainModel _mainModel = null;
-        public MainModel MainModel
+        public MainModel Model
         {
             get
             {
@@ -53,7 +57,7 @@ namespace Mobile.ViewModel
                 if (value != _mainModel)
                 {
                     _mainModel = value;
-                    RaisePropertyChanged(() => MainModel);
+                    RaisePropertyChanged(() => Model);
                 }
             }
         }

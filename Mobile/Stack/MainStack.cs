@@ -1,4 +1,5 @@
 ﻿using Definition.Interfaces;
+using Mobile.Model;
 using Mobile.PageLocator;
 using Mobile.View;
 using Mobile.ViewModel;
@@ -34,7 +35,7 @@ namespace Mobile.Stack
             {             
                 Title = "Menu",
                 Icon = "",  //TODO: add in default icon 
-                BindingContext = new MenuViewModel(),
+                BindingContext = null, //TODO: Construct ViewModel
             };
         }
 

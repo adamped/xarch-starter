@@ -151,6 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\drawable\Background.jpg" />
+    <AndroidResource Include="Resources\drawable\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mobile\Mobile.csproj">

@@ -19,7 +19,8 @@ namespace Mobile.View
         public BasePage()
         {
             InitializeComponent();
-            PageInstanceId = Guid.NewGuid();                
+            PageInstanceId = Guid.NewGuid();
+           
         }
 
         private bool _initialView = true;

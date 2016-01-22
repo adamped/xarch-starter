@@ -2,10 +2,9 @@
 using Definition.Interfaces;
 using Definition.Interfaces.Messenger;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using Mobile.Helper;
 using Mobile.Model;
-using System;
-using System.Threading.Tasks;
 
 namespace Mobile.ViewModel
 {
@@ -15,12 +14,15 @@ namespace Mobile.ViewModel
         private IAppLoader _appLoader = null;
         private IDefaultMessenger _defaultMessenger = null;
 
-        public LoginViewModel(IAppLoader appLoader, LoginModel loginModel, IDefaultMessenger defaultMessenger) : base(defaultMessenger)
+        public LoginViewModel(IAppLoader appLoader, LoginModel model, 
+                              IDefaultMessenger defaultMessenger, IExtNavigationService navigationService, 
+                              IDialogService dialogService) 
+             : base(defaultMessenger, model, navigationService, dialogService)
         {
             _appLoader = appLoader;
             _defaultMessenger = defaultMessenger;
             
-            Model = loginModel;
+            Model = model;
         }
 
         private LoginModel _model = null;
