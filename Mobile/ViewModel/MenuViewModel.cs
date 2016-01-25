@@ -8,7 +8,7 @@ namespace Mobile.ViewModel
     public class MenuViewModel : BaseViewModel
     {
         public MenuViewModel(MenuModel model, IDefaultMessenger defaultMessenger,
-                             IExtNavigationService navigationService, IDialogService dialogService)
+                             IExtNavigationService navigationService, IExtDialogService dialogService)
              : base(defaultMessenger, model, navigationService, dialogService)
         { }
 

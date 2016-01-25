@@ -15,7 +15,7 @@ namespace Mobile.ViewModel
         protected AsyncLock _lock = new AsyncLock();
         private readonly BaseModel _model = null;
 
-        public BaseViewModel(GalaSoft.MvvmLight.Messaging.IMessenger messenger, BaseModel model, IExtNavigationService navigationService, IDialogService dialogService) : base(messenger)
+        public BaseViewModel(GalaSoft.MvvmLight.Messaging.IMessenger messenger, BaseModel model, IExtNavigationService navigationService, IExtDialogService dialogService) : base(messenger)
         {
             _model = model;
             NavigationService = navigationService;
@@ -24,7 +24,7 @@ namespace Mobile.ViewModel
 
         protected IExtNavigationService NavigationService { get; private set; }
 
-        protected IDialogService DialogService { get; private set; }
+        protected IExtDialogService DialogService { get; private set; }
 
         public virtual void Subscribe() { }
 

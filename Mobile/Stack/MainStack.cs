@@ -1,4 +1,5 @@
 ﻿using Definition.Interfaces;
+using GalaSoft.MvvmLight.Views;
 using Mobile.Model;
 using Mobile.PageLocator;
 using Mobile.View;
@@ -17,7 +18,7 @@ namespace Mobile.Stack
 
         private Main _locator = new Main();
 
-        public MainStack()
+        public MainStack(IExtNavigationService navigationService, IExtDialogService dialogService, IPageService pageService): base(navigationService, dialogService, pageService)
         {
             NavigationPage = new NavigationPage();
 

@@ -16,7 +16,7 @@ namespace Mobile.ViewModel
 
         public LoginViewModel(IAppLoader appLoader, LoginModel model, 
                               IDefaultMessenger defaultMessenger, IExtNavigationService navigationService, 
-                              IDialogService dialogService) 
+                              IExtDialogService dialogService) 
              : base(defaultMessenger, model, navigationService, dialogService)
         {
             _appLoader = appLoader;

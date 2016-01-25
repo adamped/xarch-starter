@@ -12,7 +12,7 @@ namespace Mobile.ViewModel
         private IDefaultMessenger _defaultMessenger = null;
 
         public MainViewModel(MainModel model, IDefaultMessenger defaultMessenger, 
-                             IExtNavigationService navigationService, IDialogService dialogService) 
+                             IExtNavigationService navigationService, IExtDialogService dialogService) 
              : base(defaultMessenger, model, navigationService, dialogService)
         {
             _defaultMessenger = defaultMessenger;

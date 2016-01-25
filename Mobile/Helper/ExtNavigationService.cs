@@ -17,10 +17,14 @@ namespace Mobile.Helper
         private IPageService _pageService;
         private static AsyncLock _lock = new AsyncLock();
 
-        public ExtNavigationService(NavigationPage navigation, IPageService pageService)
+        public ExtNavigationService(IPageService pageService)
+        {
+            _pageService = pageService;
+        }
+
+        public void Init(NavigationPage navigation)
         {
             _navigation = navigation;
-            _pageService = pageService;
         }
 
         public string CurrentPageKey
@@ -67,7 +71,7 @@ namespace Mobile.Helper
 
                     if (page == null)
                         throw new Exception(String.Format("Unable to build page {0}", type.ToString()));
-                    
+
                     var tabbedPage = page as TabbedPage;
                     if (tabbedPage != null)
                         foreach (var child in tabbedPage.Children)

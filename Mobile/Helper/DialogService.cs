@@ -1,5 +1,6 @@
 ﻿// Copyright: Based upon sample code provided by MVVMLight
 
+using Definition.Interfaces;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using Xamarin.Forms;
 
 namespace Mobile.Helper
 {
-    public class DialogService : IDialogService
+    public class DialogService : IExtDialogService
     {
         private Page _dialogPage;
         public async Task ShowError(string message,
@@ -116,14 +117,13 @@ namespace Mobile.Helper
                     message,
                     "OK");
         }
-        public DialogService()
-        {
+       
 
-        }
-        public DialogService(Page dialogPage)
+        public void Init(Page dialogPage)
         {
             _dialogPage = dialogPage;
         }
+
 
     }
 }

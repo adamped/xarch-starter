@@ -9,6 +9,7 @@ using Definition.Interfaces.Service;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using Mobile.Helper;
 using Mobile.Messenger;
 using Mobile.Model;
 using Mobile.Stack;
@@ -31,6 +32,9 @@ namespace Mobile
         {
 
             // Sequence is important here
+
+            // Load Services
+            InitializeServices();
 
             // Load Navigation Stacks
             InitializeStacks();
@@ -55,12 +59,23 @@ namespace Mobile
         /// <summary>
         /// Helper function to check if already registered before trying again
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="func"></param>
+        private void RegisterOnce<TInterface, TClass>() where TClass : class
+                                                        where TInterface : class
+        {
+            if (!SimpleIoc.Default.IsRegistered<TInterface>())
+                SimpleIoc.Default.Register<TInterface, TClass>();
+        }
+
+        private void RegisterOnce<TClass>() where TClass : class
+        {
+            if (!SimpleIoc.Default.IsRegistered<TClass>())
+                SimpleIoc.Default.Register<TClass>();
+        }
+
         private void RegisterOnce<T>(Func<T> func) where T : class
         {
             if (!SimpleIoc.Default.IsRegistered<T>())
-                SimpleIoc.Default.Register(func);
+                SimpleIoc.Default.Register<T>(func);
         }
 
         private void RegisterAuthRepository<T>() where T : IAuthRepository
@@ -69,14 +84,25 @@ namespace Mobile
             authorizationService.InjectAuthorization(ServiceLocator.Current.GetInstance<T>());
         }
 
+        private void InitializeServices()
+        {
+            RegisterOnce<IPageService, PageService>();
+            RegisterOnce<IExtNavigationService, ExtNavigationService>();
+            RegisterOnce<IExtDialogService, DialogService>();
+        }
+
         /// <summary>
         /// Loads all the navigation stacks
         /// </summary>
         private void InitializeStacks()
         {
+
+            RegisterOnce<AuthenticationStack>();
+            RegisterOnce<MainStack>();
+
             _stacks = new Dictionary<StackEnum, IStack>();
-            _stacks.Add(StackEnum.Authentication, new AuthenticationStack());
-            _stacks.Add(StackEnum.Main, new MainStack());
+            _stacks.Add(StackEnum.Authentication, ServiceLocator.Current.GetInstance<AuthenticationStack>());
+            _stacks.Add(StackEnum.Main, ServiceLocator.Current.GetInstance<MainStack>());
         }
 
         private void InitializeRepositories()
@@ -87,8 +113,8 @@ namespace Mobile
 
         private void InitializeDataServices()
         {
-            RegisterOnce<IAuthenticationService>(() => new AuthenticationService(ServiceLocator.Current.GetInstance<IAuthenticationRepository>()));
-            RegisterOnce<IExampleService>(() => new ExampleService(ServiceLocator.Current.GetInstance<IExampleRepository>()));
+            RegisterOnce<IAuthenticationService, AuthenticationService>();
+            RegisterOnce<IExampleService, ExampleService>();
             
         }
 
@@ -99,13 +125,15 @@ namespace Mobile
 
         private void InitializeMessengers()
         {
-            RegisterOnce<IDefaultMessenger>(() => new DefaultMessenger());
+            RegisterOnce<IDefaultMessenger, DefaultMessenger>();
         }
 
         private void InitializeModels()
         {
-            RegisterOnce(() => new LoginModel(ServiceLocator.Current.GetInstance<IAuthenticationService>()));
-            RegisterOnce(() => new MainModel());
+            RegisterOnce<LoginModel>();
+            RegisterOnce<MainModel>();
+            RegisterOnce<AboutModel>();
+            RegisterOnce<MenuModel>();
         }
 
 
@@ -160,13 +188,10 @@ namespace Mobile
                 if (stack == _currentStack)
                     return;
 
-                // Unregister all current services
-                UnRegisterServices();
-
                 var stackInstance = _stacks[stack];
 
                 // Register Services
-                await stackInstance.RegisterServices(navigationArgs);
+                await stackInstance.InitializeServices(navigationArgs);
 
                 // Change MainPage
                 App.Current.MainPage = stackInstance.MainPage;
@@ -175,13 +200,5 @@ namespace Mobile
             }
         }
 
-        /// <summary>
-        /// Unregisters all services registered within this class
-        /// </summary>
-        private void UnRegisterServices()
-        {
-            SimpleIoc.Default.Unregister<IExtNavigationService>();
-            SimpleIoc.Default.Unregister<IDialogService>();
-        }
     }
 }

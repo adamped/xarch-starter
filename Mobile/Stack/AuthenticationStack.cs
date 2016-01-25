@@ -1,4 +1,5 @@
 ﻿using Definition.Interfaces;
+using GalaSoft.MvvmLight.Views;
 using Mobile.PageLocator;
 using Mobile.View;
 using Mobile.ViewModel;
@@ -11,7 +12,7 @@ namespace Mobile.Stack
 
         private Authentication _locator = new Authentication();
 
-        public AuthenticationStack()
+        public AuthenticationStack(IExtNavigationService navigationService, IExtDialogService dialogService, IPageService pageService) : base(navigationService, dialogService, pageService)
         {
             var navPage = new NavigationPage();
 

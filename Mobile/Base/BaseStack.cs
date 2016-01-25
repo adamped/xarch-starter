@@ -14,28 +14,26 @@ namespace Mobile.Stack
         public NavigationPage NavigationPage { get; protected set; }
 
         protected IExtNavigationService _navigationService = null;
-        private IDialogService _dialogService = null;
+        private IExtDialogService _dialogService = null;
         protected IPageService _pageService = null;
 
         private bool _isFirstRun = false;
 
+        public BaseStack(IExtNavigationService navigationService, IExtDialogService dialogService, IPageService pageService)
+        {
+            _navigationService = navigationService;
+            _dialogService = dialogService;
+            _pageService = pageService;
+        }
+
         /// <summary>
         /// Will register appropriate Services for Dependency Injection.
         /// </summary>
-        public async Task RegisterServices(INavigationArgs navigationArgs = null)
+        public async Task InitializeServices(INavigationArgs navigationArgs = null)
         {
-            if (_pageService == null)
-                _pageService = new PageService();
 
-            if (_navigationService == null)
-                _navigationService = new ExtNavigationService(NavigationPage, _pageService);
-
-            SimpleIoc.Default.Register<IExtNavigationService>(() => _navigationService);
-
-            if (_dialogService == null)
-                _dialogService = new DialogService(NavigationPage);
-           
-            SimpleIoc.Default.Register<IDialogService>(() => _dialogService);
+            _navigationService.Init(NavigationPage);
+            _dialogService.Init(NavigationPage);
 
             if (!_isFirstRun)
             {

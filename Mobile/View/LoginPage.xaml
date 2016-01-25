@@ -10,16 +10,7 @@
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
-        <RowDefinition>
-          <RowDefinition.Height>
-            <OnPlatform x:TypeArguments="x:Double">
-              <Windows>200</Windows>
-              <WinPhone>350</WinPhone>
-              <Android>350</Android>
-              <iOS>350</iOS>
-            </OnPlatform>
-          </RowDefinition.Height>
-        </RowDefinition>
+        <RowDefinition Height="350" />
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
       <Image Source="Logo.png" Grid.Row="0" VerticalOptions="End" HorizontalOptions="Center" />

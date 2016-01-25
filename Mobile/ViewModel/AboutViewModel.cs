@@ -13,7 +13,7 @@ namespace Mobile.ViewModel
     public class AboutViewModel : BaseViewModel
     {
         public AboutViewModel(AboutModel model, IDefaultMessenger defaultMessenger, 
-                              IExtNavigationService navigationService, IDialogService dialogService) 
+                              IExtNavigationService navigationService, IExtDialogService dialogService) 
              : base(defaultMessenger, model, navigationService, dialogService)
         { }
 
