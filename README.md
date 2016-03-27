@@ -1,3 +1,5 @@
+**[Depreceated]** - In favor of [Exrin](https://github.com/adamped/exrin)
+
 # Xamarin Forms Complete Starter Project
 A light weight starter project for Xamarin Forms
 
