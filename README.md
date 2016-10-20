@@ -1,5 +1,7 @@
 # Xamarin Forms Complete Starter Project
-A light weight starter project for Xamarin Forms
+A light weight starter project for Xamarin Forms.
+
+If you are looking for a more enterprise based architecture, check out [Exrin](https://github.com/exrin/Exrin)
 
 # Why?
 As with most technologies the default sample projects only ever show the simplest way to do things. But if you need to develop a production quality application you have no idea on the best approach. Maybe that is because the great thing about programming is you can choose so many approaches, why would you limit yourself?
