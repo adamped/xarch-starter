@@ -115,6 +115,7 @@
     <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Assets\SplashScreenImage.png" />
     <Content Include="Background.jpg" />
+    <Content Include="Icon.png" />
     <Content Include="Logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

@@ -19,8 +19,7 @@ namespace Mobile
             // Set default ServiceLocatorProvider 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if (Device.OS == TargetPlatform.Windows) // Due to bug: https://bugzilla.xamarin.com/show_bug.cgi?id=36730 (remove this code once bug fixed)
-                Device.BeginInvokeOnMainThread(() => { OnStart(); });
+          
 
         }
 

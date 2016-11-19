@@ -35,8 +35,8 @@ namespace Mobile.Stack
             return new MenuPage()
             {             
                 Title = "Menu",
-                Icon = "",  //TODO: add in default icon 
-                BindingContext = null, //TODO: Construct ViewModel
+                Icon = "icon.png",  //TODO: add in default icon 
+                BindingContext = new MenuViewModel(null, null, null, null) 
             };
         }
 
